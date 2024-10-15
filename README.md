@@ -53,3 +53,10 @@ Planned future features and improvements:
 ### 9/10/2024
 
 - Created basic setup for both frontend and backend
+
+### 15/10/2024
+
+- Created basic job and temp entities
+- Implemented job controller and service
+- Created a test for creating a job
+- Created function to create a job
