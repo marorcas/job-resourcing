@@ -34,7 +34,7 @@ public class JobEndToEndTest {
         jobRepository.save(job1);
 
         Job job2 = new Job();
-        job1.setName("Job no. 2");
+        job2.setName("Job no. 2");
         jobRepository.save(job2);
     }
 

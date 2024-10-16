@@ -1,4 +1,4 @@
-package io.nology.resourcing.job;
+package io.nology.resourcing.temp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-@RequestMapping("jobs")
-public class JobController {
+@RequestMapping("temps")
+public class TempController {
     @Autowired
-    private JobService jobService;
+    private TempService tempService;
 
     @PostMapping
-    public ResponseEntity<Job> createJob(@Valid @RequestBody CreateJobDTO data) throws Exception {
-        Job createdJob = this.jobService.createJob(data);
-        return new ResponseEntity<Job>(createdJob, HttpStatus.CREATED);
+    public ResponseEntity<Temp> createTemp(@Valid @RequestBody CreateTempDTO data) throws Exception {
+        Temp createdTemp = this.tempService.createTemp(data);
+        return new ResponseEntity<Temp>(createdTemp, HttpStatus.CREATED);
     }
 
 }

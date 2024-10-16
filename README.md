@@ -60,3 +60,10 @@ Planned future features and improvements:
 - Implemented job controller and service
 - Created a test for creating a job
 - Created function to create a job
+
+### 16/10/2024
+
+- Created a CreateTempDTO
+- Created a test for creating a temp
+- Implemented temp controller and service
+- Created function to create a temp
