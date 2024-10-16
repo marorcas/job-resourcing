@@ -1,5 +1,7 @@
 package io.nology.resourcing.job;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("jobs")
@@ -23,4 +26,9 @@ public class JobController {
         return new ResponseEntity<Job>(createdJob, HttpStatus.CREATED);
     }
 
+    @GetMapping
+    public ResponseEntity<List<Job>> findAllJobs() {
+        List<Job> allJobs = this.jobService.findAllJobs();
+        return new ResponseEntity<List<Job>>(allJobs, HttpStatus.OK);
+    }
 }

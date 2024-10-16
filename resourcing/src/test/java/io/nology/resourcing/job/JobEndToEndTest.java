@@ -30,12 +30,24 @@ public class JobEndToEndTest {
         jobRepository.deleteAll();
 
         Job job1 = new Job();
-        job1.setName("Job no. 1");
+        job1.setName("Job 1");
         jobRepository.save(job1);
 
         Job job2 = new Job();
-        job2.setName("Job no. 2");
+        job2.setName("Job 2");
         jobRepository.save(job2);
+    }
+
+    @Test
+    public void getAllJobs() {
+        given()
+                .when()
+                .get("/jobs")
+                .then()
+                .statusCode(HttpStatus.OK.value())
+                .body("$", hasSize(2))
+                .body("name", hasItems("Job 1", "Job 2"))
+                .body(matchesJsonSchemaInClasspath("io/nology/resourcing/job/schemas/jobs-schema.json"));
     }
 
     @Test

@@ -67,3 +67,5 @@ Planned future features and improvements:
 - Created a test for creating a temp
 - Implemented temp controller and service
 - Created function to create a temp
+- Created a test for fetching all jobs
+- Created function to fetch all jobs

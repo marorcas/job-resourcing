@@ -1,5 +1,7 @@
 package io.nology.resourcing.job;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,4 +19,7 @@ public class JobService {
         return this.jobRepository.save(createdJob);
     }
 
+    public List<Job> findAllJobs() {
+        return this.jobRepository.findAll();
+    }
 }
