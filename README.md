@@ -69,3 +69,4 @@ Planned future features and improvements:
 - Created function to create a temp
 - Created a test for fetching all jobs
 - Created function to fetch all jobs
+- Fixed frontend testing globals issue 
