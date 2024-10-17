@@ -1,6 +1,6 @@
 package io.nology.resourcing.job;
 
-// import java.util.Date;
+import java.time.LocalDate;
 
 import jakarta.validation.constraints.NotBlank;
 
@@ -8,11 +8,9 @@ public class CreateJobDTO {
     @NotBlank
     private String name;
 
-    // @NotBlank
-    // private Date startDate;
+    private LocalDate startDate;
 
-    // @NotBlank
-    // private Date enDate;
+    private LocalDate endDate;
 
     public String getName() {
         return name;
@@ -22,19 +20,19 @@ public class CreateJobDTO {
         this.name = name;
     }
 
-    // public Date getStartDate() {
-    // return startDate;
-    // }
+    public LocalDate getStartDate() {
+        return startDate;
+    }
 
-    // public void setStartDate(Date startDate) {
-    // this.startDate = startDate;
-    // }
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
 
-    // public Date getEnDate() {
-    // return enDate;
-    // }
+    public LocalDate getEndDate() {
+        return endDate;
+    }
 
-    // public void setEnDate(Date enDate) {
-    // this.enDate = enDate;
-    // }
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
 }

@@ -75,3 +75,4 @@ Planned future features and improvements:
 
 - Created test for fetching all temps
 - Created function to fetch all temps
+- Added start date and end date to job entity

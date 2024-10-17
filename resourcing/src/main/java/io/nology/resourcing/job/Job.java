@@ -1,6 +1,8 @@
 package io.nology.resourcing.job;
 
-// import java.util.Date;
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,8 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-// import jakarta.persistence.Temporal;
-// import jakarta.persistence.TemporalType;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "jobs")
@@ -21,13 +23,15 @@ public class Job {
     @Column
     private String name;
 
-    // @Column
-    // @Temporal(TemporalType.TIMESTAMP)
-    // private Date startDate;
+    @Column
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate startDate;
 
-    // @Column
-    // @Temporal(TemporalType.TIMESTAMP)
-    // private Date endDate;
+    @Column
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate endDate;
 
     public Long getId() {
         return id;
@@ -45,19 +49,19 @@ public class Job {
         this.name = name;
     }
 
-    // public Date getStartDate() {
-    // return startDate;
-    // }
+    public LocalDate getStartDate() {
+        return startDate;
+    }
 
-    // public void setStartDate(Date startDate) {
-    // this.startDate = startDate;
-    // }
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
 
-    // public Date getEndDate() {
-    // return endDate;
-    // }
+    public LocalDate getEndDate() {
+        return endDate;
+    }
 
-    // public void setEndDate(Date endDate) {
-    // this.endDate = endDate;
-    // }
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
 }

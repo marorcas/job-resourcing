@@ -15,6 +15,8 @@ public class JobService {
     public Job createJob(@Valid CreateJobDTO data) throws Exception {
         Job createdJob = new Job();
         createdJob.setName(data.getName());
+        createdJob.setStartDate(data.getStartDate());
+        createdJob.setEndDate(data.getEndDate());
 
         return this.jobRepository.save(createdJob);
     }
