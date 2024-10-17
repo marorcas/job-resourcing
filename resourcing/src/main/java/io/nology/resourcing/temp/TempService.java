@@ -1,5 +1,7 @@
 package io.nology.resourcing.temp;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,5 +18,9 @@ public class TempService {
         createdTemp.setLastName(data.getLastName());
 
         return this.tempRepository.save(createdTemp);
+    }
+
+    public List<Temp> findAllTemps() {
+        return this.tempRepository.findAll();
     }
 }

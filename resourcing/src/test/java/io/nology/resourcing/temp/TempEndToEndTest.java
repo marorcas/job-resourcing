@@ -2,7 +2,6 @@ package io.nology.resourcing.temp;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
-import static org.hamcrest.Matchers.notNullValue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,6 +39,19 @@ public class TempEndToEndTest {
         temp2.setFirstName("Jane");
         temp2.setLastName("Doe");
         tempRepository.save(temp2);
+    }
+
+    @Test
+    public void getAllTemps() {
+        given()
+                .when()
+                .get("/temps")
+                .then()
+                .statusCode(HttpStatus.OK.value())
+                .body("$", hasSize(2))
+                .body("firstName", hasItems("John", "Jane"))
+                .body("lastName", hasItems("Smith", "Doe"))
+                .body(matchesJsonSchemaInClasspath("io/nology/resourcing/temp/schemas/temps-schema.json"));
     }
 
     @Test

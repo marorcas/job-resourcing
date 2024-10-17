@@ -1,5 +1,7 @@
 package io.nology.resourcing.temp;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("temps")
@@ -21,6 +24,12 @@ public class TempController {
     public ResponseEntity<Temp> createTemp(@Valid @RequestBody CreateTempDTO data) throws Exception {
         Temp createdTemp = this.tempService.createTemp(data);
         return new ResponseEntity<Temp>(createdTemp, HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Temp>> findAllTemps() {
+        List<Temp> allTemps = this.tempService.findAllTemps();
+        return new ResponseEntity<List<Temp>>(allTemps, HttpStatus.OK);
     }
 
 }

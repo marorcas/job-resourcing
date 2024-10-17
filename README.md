@@ -70,3 +70,8 @@ Planned future features and improvements:
 - Created a test for fetching all jobs
 - Created function to fetch all jobs
 - Fixed frontend testing globals issue 
+
+### 17/10/2024
+
+- Created test for fetching all temps
+- Created function to fetch all temps
