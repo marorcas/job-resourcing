@@ -1,11 +1,16 @@
 package io.nology.resourcing.temp;
 
+import io.nology.resourcing.job.Job;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "temps")
@@ -19,6 +24,13 @@ public class Temp {
 
     @Column
     private String lastName;
+
+    @ManyToMany(mappedBy = "temps")
+    private Set<Job> jobs = new HashSet<>();
+
+    public Temp() {
+
+    }
 
     public Long getId() {
         return id;
@@ -42,5 +54,13 @@ public class Temp {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Set<Job> getJobs() {
+        return jobs;
+    }
+
+    public void setJobs(Set<Job> jobs) {
+        this.jobs = jobs;
     }
 }

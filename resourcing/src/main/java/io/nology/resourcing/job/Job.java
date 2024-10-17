@@ -1,14 +1,20 @@
 package io.nology.resourcing.job;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import io.nology.resourcing.temp.Temp;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -32,6 +38,14 @@ public class Job {
     @Temporal(TemporalType.DATE)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate endDate;
+
+    @ManyToMany
+    @JoinTable(name = "job_temp", joinColumns = @JoinColumn(name = "job_id"), inverseJoinColumns = @JoinColumn(name = "temp_id"))
+    private Set<Temp> temps = new HashSet<>();
+
+    public Job() {
+
+    }
 
     public Long getId() {
         return id;
@@ -63,5 +77,13 @@ public class Job {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+
+    public Set<Temp> getTemps() {
+        return temps;
+    }
+
+    public void setTemps(Set<Temp> temps) {
+        this.temps = temps;
     }
 }
