@@ -77,3 +77,8 @@ Planned future features and improvements:
 - Created function to fetch all temps
 - Added start date and end date to job entity
 - Implemented many to many relationship between job and temp
+- Created basic UI design on Figma
+
+### 22/10/2024
+
+- Implemented basic outline of frontend design
