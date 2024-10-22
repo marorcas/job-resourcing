@@ -12,7 +12,14 @@
     align-items: center;
     width: inherit;
     height: inherit;
+    font-weight: bold;
+    color: gray;
+
     &:hover {
-        background-color: pink;
+        color: gray;
+    }
+
+    &:focus {
+        color: white;
     }
 }

@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import LeftSideBar from './components/LeftSideBar/LeftSideBar'
 import PageContainer from './containers/PageContainer/PageContainer'
 import JobsPage from './pages/JobsPage/JobsPage'
-import PageWrapper from './components/PageWrapper/PageWrapper'
+import PageWrapper from './wrappers/PageWrapper/PageWrapper'
 import PeoplePage from './pages/PeoplePage/PeoplePage'
 import DashboardPage from './pages/DashboardPage/DashboardPage'
 

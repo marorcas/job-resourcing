@@ -6,6 +6,9 @@ const NavBar = () => {
     <nav className={styles.NavBar}>
         <NavLink 
             className={styles.NavLink}
+            style={({ isActive }) => ({
+                color: isActive ? 'white' : 'grey'
+              })}
             to="/"
         >
             Dashboard

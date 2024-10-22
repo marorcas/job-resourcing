@@ -82,3 +82,4 @@ Planned future features and improvements:
 ### 22/10/2024
 
 - Implemented basic outline of frontend design
+- Implemented basic frontend design for jobs page
