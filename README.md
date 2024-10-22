@@ -83,3 +83,4 @@ Planned future features and improvements:
 
 - Implemented basic outline of frontend design
 - Implemented basic frontend design for jobs page
+- Implemented basic frontend design for people page

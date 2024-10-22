@@ -1,8 +1,8 @@
 import { useState } from "react";
 import JobCard from "../../components/JobCard/JobCard";
-import JobsWrapper from "../../wrappers/JobsWrapper/JobsWrapper";
 import styles from "./JobsPage.module.scss";
 import { JobResponse } from "../../services/job-services";
+import ListWrapper from "../../wrappers/ListWrapper/ListWrapper";
 
 const JobsPage = () => {
   const tempJobs = [
@@ -29,11 +29,11 @@ const JobsPage = () => {
         <h2>Jobs</h2>
         <p>Search Bar</p>
         <p>Filter By</p>
-        <JobsWrapper>
+        <ListWrapper>
           {tempJobs.map((job) => 
             <JobCard key={job.id} job={job} onClick={handleJobClick}/>
           )}
-        </JobsWrapper>
+        </ListWrapper>
       </div>
 
       {selectedJob && (
