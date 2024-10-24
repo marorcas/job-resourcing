@@ -84,3 +84,8 @@ Planned future features and improvements:
 - Implemented basic outline of frontend design
 - Implemented basic frontend design for jobs page
 - Implemented basic frontend design for people page
+
+### 24/10/2024
+
+- Created test for fetching a job by id
+- Created function to fetch a job by id

@@ -1,6 +1,7 @@
 package io.nology.resourcing.job;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("jobs")
@@ -30,5 +32,12 @@ public class JobController {
     public ResponseEntity<List<Job>> findAllJobs() {
         List<Job> allJobs = this.jobService.findAllJobs();
         return new ResponseEntity<List<Job>>(allJobs, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Job> findJobById(@PathVariable Long id) throws Exception {
+        Optional<Job> job = this.jobService.findJobById(id);
+        Job foundJob = job.orElseThrow();
+        return new ResponseEntity<Job>(foundJob, HttpStatus.OK);
     }
 }

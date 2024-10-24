@@ -1,6 +1,7 @@
 package io.nology.resourcing.job;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,5 +24,9 @@ public class JobService {
 
     public List<Job> findAllJobs() {
         return this.jobRepository.findAll();
+    }
+
+    public Optional<Job> findJobById(Long id) {
+        return this.jobRepository.findById(id);
     }
 }

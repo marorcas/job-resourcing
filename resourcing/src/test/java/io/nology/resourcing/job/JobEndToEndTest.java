@@ -28,32 +28,37 @@ public class JobEndToEndTest {
     @Autowired
     private JobRepository jobRepository;
 
+    private LocalDate date;
+
+    private String formattedDate;
+
+    private Long savedJobId;
+
     @BeforeEach
     public void setUp() {
         RestAssured.port = port;
         jobRepository.deleteAll();
 
-        LocalDate today = LocalDate.now();
+        date = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        formattedDate = date.format(formatter);
 
         Job job1 = new Job();
         job1.setName("Job 1");
-        job1.setStartDate(today);
-        job1.setEndDate(today);
+        job1.setStartDate(date);
+        job1.setEndDate(date);
         jobRepository.save(job1);
+        savedJobId = job1.getId();
 
         Job job2 = new Job();
         job2.setName("Job 2");
-        job2.setStartDate(today);
-        job2.setEndDate(today);
+        job2.setStartDate(date);
+        job2.setEndDate(date);
         jobRepository.save(job2);
     }
 
     @Test
     public void getAllJobs() {
-        LocalDate date = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String formattedDate = date.format(formatter);
-
         given()
                 .when()
                 .get("/jobs")
@@ -66,15 +71,25 @@ public class JobEndToEndTest {
     }
 
     @Test
+    public void getJobById() {
+        given()
+                .when()
+                .get("/jobs/" + savedJobId)
+                .then()
+                .statusCode(HttpStatus.OK.value())
+                .body("name", equalTo("Job 1"))
+                .body("startDate", equalTo(formattedDate))
+                .body("endDate", equalTo(formattedDate))
+                .body("id", notNullValue())
+                .body(matchesJsonSchemaInClasspath("io/nology/resourcing/job/schemas/job-schema.json"));
+    }
+
+    @Test
     public void createJob_success() {
         CreateJobDTO data = new CreateJobDTO();
         data.setName("new job");
-        data.setStartDate(LocalDate.now());
-        data.setEndDate(LocalDate.now());
-
-        LocalDate date = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String formattedDate = date.format(formatter);
+        data.setStartDate(date);
+        data.setEndDate(date);
 
         given()
                 .contentType(ContentType.JSON)
