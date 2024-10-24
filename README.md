@@ -89,3 +89,5 @@ Planned future features and improvements:
 
 - Created test for fetching a job by id
 - Created function to fetch a job by id
+- Created test for fetching a temp by id
+- Created function to fetch a temp by id 

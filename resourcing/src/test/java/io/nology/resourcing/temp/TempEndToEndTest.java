@@ -25,6 +25,8 @@ public class TempEndToEndTest {
     @Autowired
     private TempRepository tempRepository;
 
+    private Long savedTempId;
+
     @BeforeEach
     public void setUp() {
         RestAssured.port = port;
@@ -34,6 +36,7 @@ public class TempEndToEndTest {
         temp1.setFirstName("John");
         temp1.setLastName("Smith");
         tempRepository.save(temp1);
+        savedTempId = temp1.getId();
 
         Temp temp2 = new Temp();
         temp2.setFirstName("Jane");
@@ -52,6 +55,19 @@ public class TempEndToEndTest {
                 .body("firstName", hasItems("John", "Jane"))
                 .body("lastName", hasItems("Smith", "Doe"))
                 .body(matchesJsonSchemaInClasspath("io/nology/resourcing/temp/schemas/temps-schema.json"));
+    }
+
+    @Test
+    public void getTempById() {
+        given()
+                .when()
+                .get("/temps/" + savedTempId)
+                .then()
+                .statusCode(HttpStatus.OK.value())
+                .body("firstName", equalTo("John"))
+                .body("lastName", equalTo("Smith"))
+                .body("id", notNullValue())
+                .body(matchesJsonSchemaInClasspath("io/nology/resourcing/temp/schemas/temp-schema.json"));
     }
 
     @Test

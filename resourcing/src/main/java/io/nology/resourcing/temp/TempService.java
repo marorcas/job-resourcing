@@ -1,6 +1,7 @@
 package io.nology.resourcing.temp;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,5 +23,9 @@ public class TempService {
 
     public List<Temp> findAllTemps() {
         return this.tempRepository.findAll();
+    }
+
+    public Optional<Temp> findTempById(Long id) {
+        return this.tempRepository.findById(id);
     }
 }
