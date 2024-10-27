@@ -58,7 +58,21 @@ public class JobEndToEndTest {
         job2.setName("Job 2");
         job2.setStartDate(date);
         job2.setEndDate(date);
+        job2.setIsAssigned(true);
         jobRepository.save(job2);
+
+        Job job3 = new Job();
+        job3.setName("Job 3");
+        job3.setStartDate(date);
+        job3.setEndDate(date);
+        job3.setIsAssigned(true);
+        jobRepository.save(job3);
+
+        Job job4 = new Job();
+        job4.setName("Job 4");
+        job4.setStartDate(date);
+        job4.setEndDate(date);
+        jobRepository.save(job4);
 
         newDate = LocalDate.now().plusDays(1);
         formattedNewDate = newDate.format(formatter);
@@ -71,11 +85,11 @@ public class JobEndToEndTest {
                 .get("/jobs")
                 .then()
                 .statusCode(HttpStatus.OK.value())
-                .body("$", hasSize(2))
-                .body("name", hasItems("Job 1", "Job 2"))
-                .body("startDate", hasItems(formattedDate, formattedDate))
-                .body("endDate", hasItems(formattedDate, formattedDate))
-                .body("isAssigned", hasItems(false, false))
+                .body("$", hasSize(4))
+                .body("name", hasItems("Job 1", "Job 2", "Job 3", "Job 4"))
+                .body("startDate", hasItems(formattedDate, formattedDate, formattedDate, formattedDate))
+                .body("endDate", hasItems(formattedDate, formattedDate, formattedDate, formattedDate))
+                .body("isAssigned", hasItems(false, true, true, false))
                 .body(matchesJsonSchemaInClasspath("io/nology/resourcing/job/schemas/jobs-schema.json"));
     }
 
@@ -92,6 +106,36 @@ public class JobEndToEndTest {
                 .body("isAssigned", equalTo(false))
                 .body("id", notNullValue())
                 .body(matchesJsonSchemaInClasspath("io/nology/resourcing/job/schemas/job-schema.json"));
+    }
+
+    @Test
+    public void getAllAssignedJobs() {
+        given()
+                .when()
+                .get("/jobs?assigned=true")
+                .then()
+                .statusCode(HttpStatus.OK.value())
+                .body("$", hasSize(2))
+                .body("name", hasItems("Job 2", "Job 3"))
+                .body("startDate", hasItems(formattedDate, formattedDate))
+                .body("endDate", hasItems(formattedDate, formattedDate))
+                .body("isAssigned", hasItems(true, true))
+                .body(matchesJsonSchemaInClasspath("io/nology/resourcing/job/schemas/jobs-schema.json"));
+    }
+
+    @Test
+    public void getAllNonAssignedJobs() {
+        given()
+                .when()
+                .get("/jobs?assigned=false")
+                .then()
+                .statusCode(HttpStatus.OK.value())
+                .body("$", hasSize(2))
+                .body("name", hasItems("Job 1", "Job 4"))
+                .body("startDate", hasItems(formattedDate, formattedDate))
+                .body("endDate", hasItems(formattedDate, formattedDate))
+                .body("isAssigned", hasItems(false, false))
+                .body(matchesJsonSchemaInClasspath("io/nology/resourcing/job/schemas/jobs-schema.json"));
     }
 
     @Test

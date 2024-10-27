@@ -26,6 +26,10 @@ public class JobService {
         return this.jobRepository.findAll();
     }
 
+    public List<Job> findJobsByIsAssigned(Boolean assigned) {
+        return this.jobRepository.findByIsAssigned(assigned);
+    }
+
     public Optional<Job> findJobById(Long id) {
         return this.jobRepository.findById(id);
     }

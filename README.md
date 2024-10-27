@@ -99,3 +99,6 @@ Planned future features and improvements:
 - Created update job dto
 - Created test for updating a job by id
 - Created function to update a job by id 
+- Created test for fetching all assigned jobs
+- Created test for fetching all non assgined jobs
+- Created function to fetch jobs by assignment status

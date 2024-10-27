@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
@@ -30,9 +31,16 @@ public class JobController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Job>> findAllJobs() {
-        List<Job> allJobs = this.jobService.findAllJobs();
-        return new ResponseEntity<List<Job>>(allJobs, HttpStatus.OK);
+    public ResponseEntity<List<Job>> findJobs(@RequestParam(value = "assigned", required = false) Boolean assigned) {
+        List<Job> jobs;
+
+        if (assigned != null) {
+            jobs = this.jobService.findJobsByIsAssigned(assigned);
+        } else {
+            jobs = this.jobService.findAllJobs();
+        }
+
+        return new ResponseEntity<List<Job>>(jobs, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
