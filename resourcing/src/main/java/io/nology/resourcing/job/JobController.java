@@ -14,6 +14,7 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
@@ -37,6 +38,14 @@ public class JobController {
     @GetMapping("/{id}")
     public ResponseEntity<Job> findJobById(@PathVariable Long id) throws Exception {
         Optional<Job> job = this.jobService.findJobById(id);
+        Job foundJob = job.orElseThrow();
+        return new ResponseEntity<Job>(foundJob, HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Job> updateJobById(@PathVariable Long id, @Valid @RequestBody UpdateJobDTO data)
+            throws Exception {
+        Optional<Job> job = this.jobService.updateJobById(id, data);
         Job foundJob = job.orElseThrow();
         return new ResponseEntity<Job>(foundJob, HttpStatus.OK);
     }

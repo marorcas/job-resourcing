@@ -96,3 +96,6 @@ Planned future features and improvements:
 
 - Added boolean property isAssigned to job entity 
 - Modified existing tests to include testing of isAssgined property 
+- Created update job dto
+- Created test for updating a job by id
+- Created function to update a job by id 

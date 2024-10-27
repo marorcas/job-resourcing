@@ -29,4 +29,32 @@ public class JobService {
     public Optional<Job> findJobById(Long id) {
         return this.jobRepository.findById(id);
     }
+
+    public Optional<Job> updateJobById(Long id, @Valid UpdateJobDTO data) throws Exception {
+        Optional<Job> job = this.findJobById(id);
+
+        if (job.isEmpty()) {
+            return job;
+        }
+
+        Job foundJob = job.get();
+
+        if (data.getName() != null) {
+            foundJob.setName(data.getName());
+        }
+
+        if (data.getStartDate() != null) {
+            foundJob.setStartDate(data.getStartDate());
+        }
+
+        if (data.getEndDate() != null) {
+            foundJob.setEndDate(data.getEndDate());
+        }
+
+        if (data.getIsAssigned() != null) {
+            foundJob.setIsAssigned(data.getIsAssigned());
+        }
+
+        return Optional.of(this.jobRepository.save(foundJob));
+    }
 }

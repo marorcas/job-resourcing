@@ -84,7 +84,7 @@ public class Job {
     }
 
     @JsonProperty("isAssigned")
-    public boolean isAssigned() {
+    public boolean getIsAssigned() {
         return isAssigned;
     }
 

@@ -7,7 +7,7 @@ interface ListWrapperProps {
 
 const ListWrapper: FC<ListWrapperProps> = ({ children }) => {
   return (
-    <div className={styles.JobsWrapper}>
+    <div className={styles.ListWrapper}>
       {children}
     </div>
   )

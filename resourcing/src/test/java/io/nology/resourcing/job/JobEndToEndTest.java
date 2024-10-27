@@ -34,6 +34,10 @@ public class JobEndToEndTest {
 
     private Long savedJobId;
 
+    private LocalDate newDate;
+
+    private String formattedNewDate;
+
     @BeforeEach
     public void setUp() {
         RestAssured.port = port;
@@ -55,6 +59,9 @@ public class JobEndToEndTest {
         job2.setStartDate(date);
         job2.setEndDate(date);
         jobRepository.save(job2);
+
+        newDate = LocalDate.now().plusDays(1);
+        formattedNewDate = newDate.format(formatter);
     }
 
     @Test
@@ -105,6 +112,69 @@ public class JobEndToEndTest {
                 .body("startDate", equalTo(formattedDate))
                 .body("endDate", equalTo(formattedDate))
                 .body("isAssigned", equalTo(false))
+                .body("id", notNullValue())
+                .body(matchesJsonSchemaInClasspath("io/nology/resourcing/job/schemas/job-schema.json"));
+    }
+
+    @Test
+    public void updateJobName_success() {
+        UpdateJobDTO data = new UpdateJobDTO();
+        data.setName("updated name test");
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(data)
+                .when()
+                .patch("/jobs/" + savedJobId)
+                .then()
+                .statusCode(HttpStatus.OK.value())
+                .body("name", equalTo("updated name test"))
+                .body("startDate", equalTo(formattedDate))
+                .body("endDate", equalTo(formattedDate))
+                .body("isAssigned", equalTo(false))
+                .body("id", notNullValue())
+                .body(matchesJsonSchemaInClasspath("io/nology/resourcing/job/schemas/job-schema.json"));
+    }
+
+    @Test
+    public void updateJobDates_success() {
+        UpdateJobDTO data = new UpdateJobDTO();
+        data.setStartDate(newDate);
+        data.setEndDate(newDate);
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(data)
+                .when()
+                .patch("/jobs/" + savedJobId)
+                .then()
+                .statusCode(HttpStatus.OK.value())
+                .body("name", equalTo("Job 1"))
+                .body("startDate", equalTo(formattedNewDate))
+                .body("endDate", equalTo(formattedNewDate))
+                .body("isAssigned", equalTo(false))
+                .body("id", notNullValue())
+                .body(matchesJsonSchemaInClasspath("io/nology/resourcing/job/schemas/job-schema.json"));
+    }
+
+    @Test
+    public void updateJobIsAssigned_success() {
+        UpdateJobDTO data = new UpdateJobDTO();
+        data.setIsAssigned(true);
+
+        System.out.println(data);
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(data)
+                .when()
+                .patch("/jobs/" + savedJobId)
+                .then()
+                .statusCode(HttpStatus.OK.value())
+                .body("name", equalTo("Job 1"))
+                .body("startDate", equalTo(formattedDate))
+                .body("endDate", equalTo(formattedDate))
+                .body("isAssigned", equalTo(true))
                 .body("id", notNullValue())
                 .body(matchesJsonSchemaInClasspath("io/nology/resourcing/job/schemas/job-schema.json"));
     }
