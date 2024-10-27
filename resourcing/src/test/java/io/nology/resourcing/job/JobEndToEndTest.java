@@ -67,6 +67,8 @@ public class JobEndToEndTest {
                 .body("$", hasSize(2))
                 .body("name", hasItems("Job 1", "Job 2"))
                 .body("startDate", hasItems(formattedDate, formattedDate))
+                .body("endDate", hasItems(formattedDate, formattedDate))
+                .body("isAssigned", hasItems(false, false))
                 .body(matchesJsonSchemaInClasspath("io/nology/resourcing/job/schemas/jobs-schema.json"));
     }
 
@@ -80,6 +82,7 @@ public class JobEndToEndTest {
                 .body("name", equalTo("Job 1"))
                 .body("startDate", equalTo(formattedDate))
                 .body("endDate", equalTo(formattedDate))
+                .body("isAssigned", equalTo(false))
                 .body("id", notNullValue())
                 .body(matchesJsonSchemaInClasspath("io/nology/resourcing/job/schemas/job-schema.json"));
     }
@@ -101,6 +104,7 @@ public class JobEndToEndTest {
                 .body("name", equalTo("new job"))
                 .body("startDate", equalTo(formattedDate))
                 .body("endDate", equalTo(formattedDate))
+                .body("isAssigned", equalTo(false))
                 .body("id", notNullValue())
                 .body(matchesJsonSchemaInClasspath("io/nology/resourcing/job/schemas/job-schema.json"));
     }

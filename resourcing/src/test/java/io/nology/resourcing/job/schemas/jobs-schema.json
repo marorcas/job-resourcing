@@ -9,8 +9,19 @@
         },
         "name": {
           "type": "string"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "isAssigned": {
+          "type": "boolean"
         }
       },
-      "required": ["id", "name"]
+      "required": ["id", "name", "startDate", "endDate", "isAssigned"]
     }
 }

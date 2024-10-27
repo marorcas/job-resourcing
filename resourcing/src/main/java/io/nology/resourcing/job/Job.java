@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.nology.resourcing.temp.Temp;
 import jakarta.persistence.Column;
@@ -38,6 +39,9 @@ public class Job {
     @Temporal(TemporalType.DATE)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate endDate;
+
+    @Column(nullable = false)
+    private boolean isAssigned = false;
 
     @ManyToMany
     @JoinTable(name = "job_temp", joinColumns = @JoinColumn(name = "job_id"), inverseJoinColumns = @JoinColumn(name = "temp_id"))
@@ -77,6 +81,15 @@ public class Job {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+
+    @JsonProperty("isAssigned")
+    public boolean isAssigned() {
+        return isAssigned;
+    }
+
+    public void setIsAssigned(boolean isAssigned) {
+        this.isAssigned = isAssigned;
     }
 
     public Set<Temp> getTemps() {

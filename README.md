@@ -91,3 +91,8 @@ Planned future features and improvements:
 - Created function to fetch a job by id
 - Created test for fetching a temp by id
 - Created function to fetch a temp by id 
+
+### 27/10/2024
+
+- Added boolean property isAssigned to job entity 
+- Modified existing tests to include testing of isAssgined property 
