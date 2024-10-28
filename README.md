@@ -102,3 +102,6 @@ Planned future features and improvements:
 - Created test for fetching all assigned jobs
 - Created test for fetching all non assgined jobs
 - Created function to fetch jobs by assignment status
+- Created update temp dto
+- Created test for updating a temp by id
+- Created a function to update a temp by id

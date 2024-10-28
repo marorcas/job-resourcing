@@ -88,4 +88,22 @@ public class TempEndToEndTest {
                 .body("id", notNullValue())
                 .body(matchesJsonSchemaInClasspath("io/nology/resourcing/temp/schemas/temp-schema.json"));
     }
+
+    @Test
+    public void updateTempName_success() {
+        UpdateTempDTO data = new UpdateTempDTO();
+        data.setFirstName("Johnny");
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(data)
+                .when()
+                .patch("/temps/" + savedTempId)
+                .then()
+                .statusCode(HttpStatus.OK.value())
+                .body("firstName", equalTo("Johnny"))
+                .body("lastName", equalTo("Smith"))
+                .body("id", notNullValue())
+                .body(matchesJsonSchemaInClasspath("io/nology/resourcing/temp/schemas/temp-schema.json"));
+    }
 }

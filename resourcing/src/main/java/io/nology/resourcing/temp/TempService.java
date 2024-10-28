@@ -28,4 +28,24 @@ public class TempService {
     public Optional<Temp> findTempById(Long id) {
         return this.tempRepository.findById(id);
     }
+
+    public Optional<Temp> updateTempById(Long id, @Valid UpdateTempDTO data) throws Exception {
+        Optional<Temp> temp = this.findTempById(id);
+
+        if (temp.isEmpty()) {
+            return temp;
+        }
+
+        Temp foundTemp = temp.get();
+
+        if (data.getFirstName() != null) {
+            foundTemp.setFirstName(data.getFirstName());
+        }
+
+        if (data.getLastName() != null) {
+            foundTemp.setLastName(data.getLastName());
+        }
+
+        return Optional.of(this.tempRepository.save(foundTemp));
+    }
 }
